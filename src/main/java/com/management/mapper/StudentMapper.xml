@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.Student" >
+    <id column="StudentID" property="studentid" jdbcType="VARCHAR" />
+    <result column="StudentName" property="studentname" jdbcType="VARCHAR" />
+    <result column="StudentSex" property="studentsex" jdbcType="VARCHAR" />
+    <result column="StudentPhone" property="studentphone" jdbcType="VARCHAR" />
+    <result column="ClassID" property="classid" jdbcType="VARCHAR" />
+    <result column="TeacherID" property="teacherid" jdbcType="VARCHAR" />
+    <result column="TeacherResult" property="teacherresult" jdbcType="INTEGER" />
+    <result column="CompanyResult" property="companyresult" jdbcType="INTEGER" />
+    <result column="TrainningResult" property="trainningresult" jdbcType="INTEGER" />
+    <result column="Direction" property="direction" jdbcType="VARCHAR" />
+    <result column="CompanyID" property="companyid" jdbcType="VARCHAR" />
+    <result column="StudentPassword" property="studentpassword" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="ParentsPhone" property="parentsphone" jdbcType="VARCHAR" />
+    <result column="StudentEmail" property="studentemail" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    StudentID, StudentName, StudentSex, StudentPhone, ClassID, TeacherID, TeacherResult, 
+    CompanyResult, TrainningResult, Direction, CompanyID, StudentPassword, CompanyName, 
+    ParentsPhone, StudentEmail, subject
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from studentinfo
+    where StudentID = #{studentid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from studentinfo
+    where StudentID = #{studentid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.Student" >
+    insert into studentinfo (StudentID, StudentName, StudentSex, 
+      StudentPhone, ClassID, TeacherID, 
+      TeacherResult, CompanyResult, TrainningResult, 
+      Direction, CompanyID, StudentPassword, 
+      CompanyName, ParentsPhone, StudentEmail, 
+      subject)
+    values (#{studentid,jdbcType=VARCHAR}, #{studentname,jdbcType=VARCHAR}, #{studentsex,jdbcType=VARCHAR}, 
+      #{studentphone,jdbcType=VARCHAR}, #{classid,jdbcType=VARCHAR}, #{teacherid,jdbcType=VARCHAR}, 
+      #{teacherresult,jdbcType=INTEGER}, #{companyresult,jdbcType=INTEGER}, #{trainningresult,jdbcType=INTEGER}, 
+      #{direction,jdbcType=VARCHAR}, #{companyid,jdbcType=VARCHAR}, #{studentpassword,jdbcType=VARCHAR},
+      #{companyname,jdbcType=VARCHAR}, #{parentsphone,jdbcType=VARCHAR}, #{studentemail,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.Student" >
+    insert into studentinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentid != null" >
+        StudentID,
+      </if>
+      <if test="studentname != null" >
+        StudentName,
+      </if>
+      <if test="studentsex != null" >
+        StudentSex,
+      </if>
+      <if test="studentphone != null" >
+        StudentPhone,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="teacherid != null" >
+        TeacherID,
+      </if>
+      <if test="teacherresult != null" >
+        TeacherResult,
+      </if>
+      <if test="companyresult != null" >
+        CompanyResult,
+      </if>
+      <if test="trainningresult != null" >
+        TrainningResult,
+      </if>
+      <if test="direction != null" >
+        Direction,
+      </if>
+      <if test="companyid != null" >
+        CompanyID,
+      </if>
+      <if test="studentpassword != null" >
+        StudentPassword,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="parentsphone != null" >
+        ParentsPhone,
+      </if>
+      <if test="studentemail != null" >
+        StudentEmail,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentname != null" >
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentsex != null" >
+        #{studentsex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentphone != null" >
+        #{studentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherresult != null" >
+        #{teacherresult,jdbcType=INTEGER},
+      </if>
+      <if test="companyresult != null" >
+        #{companyresult,jdbcType=INTEGER},
+      </if>
+      <if test="trainningresult != null" >
+        #{trainningresult,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentpassword != null" >
+        #{studentpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsphone != null" >
+        #{parentsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentemail != null" >
+        #{studentemail,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Student" >
+    update studentinfo
+    <set >
+      <if test="studentname != null" >
+        StudentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentsex != null" >
+        StudentSex = #{studentsex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentphone != null" >
+        StudentPhone = #{studentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        ClassID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherid != null" >
+        TeacherID = #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherresult != null" >
+        TeacherResult = #{teacherresult,jdbcType=INTEGER},
+      </if>
+      <if test="companyresult != null" >
+        CompanyResult = #{companyresult,jdbcType=INTEGER},
+      </if>
+      <if test="trainningresult != null" >
+        TrainningResult = #{trainningresult,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        Direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        CompanyID = #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentpassword != null" >
+        StudentPassword = #{studentpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsphone != null" >
+        ParentsPhone = #{parentsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentemail != null" >
+        StudentEmail = #{studentemail,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where StudentID = #{studentid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.Student" >
+    update studentinfo
+    set StudentName = #{studentname,jdbcType=VARCHAR},
+      StudentSex = #{studentsex,jdbcType=VARCHAR},
+      StudentPhone = #{studentphone,jdbcType=VARCHAR},
+      ClassID = #{classid,jdbcType=VARCHAR},
+      TeacherID = #{teacherid,jdbcType=VARCHAR},
+      TeacherResult = #{teacherresult,jdbcType=INTEGER},
+      CompanyResult = #{companyresult,jdbcType=INTEGER},
+      TrainningResult = #{trainningresult,jdbcType=INTEGER},
+      Direction = #{direction,jdbcType=VARCHAR},
+      CompanyID = #{companyid,jdbcType=VARCHAR},
+      StudentPassword = #{studentpassword,jdbcType=VARCHAR},
+      CompanyName = #{companyname,jdbcType=VARCHAR},
+      ParentsPhone = #{parentsphone,jdbcType=VARCHAR},
+      StudentEmail = #{studentemail,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR}
+    where StudentID = #{studentid,jdbcType=VARCHAR}
+  </update>
+  
+      <!-- 学生登录 -->
+  <select id="login" parameterType="map" resultType="com.management.model.Student">
+    select * from studentinfo where StudentID = #{studentID} and StudentPassword = #{password}
+  </select>
+  
+   <!-- 更新学生去向等信息 -->
+  <update id="updateStudentDirection" parameterType="com.management.model.Student">
+    update studentinfo
+    <set >
+      <if test="studentname != null" >
+        StudentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="studentsex != null" >
+        StudentSex = #{studentsex,jdbcType=INTEGER},
+      </if>
+      <if test="studentphone != null" >
+        StudentPhone = #{studentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        ClassID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherid != null" >
+        TeacherID = #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="trainningresult != null" >
+        TrainningResult = #{trainningresult,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null" >
+        Direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        CompanyID = #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentpassword != null" >
+        StudentPassword = #{studentpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentsphone != null" >
+        ParentsPhone = #{parentsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentemail != null" >
+        StudentEmail = #{studentemail,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        Subject = #{subject,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where StudentID = #{studentid,jdbcType=VARCHAR}
+  </update>
+  
+    <!-- 获取教师全部学生信息 -->
+  <select id="findAllStudent" parameterType="java.lang.String" resultType="com.management.model.Student">
+    select * from studentinfo
+    where studentinfo.TeacherID = #{teacherID}
+  </select>
+  
+   <!-- 获取全部学生信息 -->
+  <select id="getAllStudent" resultType="map">
+    select *,teacherinfo.teachername from studentinfo left join teacherinfo on studentinfo.teacherid = teacherinfo.teacherid
+  </select>
+  
+    <!-- 重置密码 -->
+  <update id="resetPassword" parameterType="java.lang.String">
+    update studentinfo
+    set StudentPassword = '123456'
+    where StudentID = #{studentID}
+  </update>
+
+  <!-- 题目验重 -->
+  <select id="getSameSubject" parameterType="com.management.model.Student" resultType="Map">
+  select subject from studentinfo where subject = #{subject} and studentid != #{studentid}
+  </select>
+
+  <select id="findAllCompanyStudent" parameterType="java.lang.String" resultType="com.management.model.Student">
+    select * from studentinfo where companyid = #{companyID}
+  </select>
+
+  <select id="exportStudent" resultType="com.management.model.Student">
+    select * FROM studentinfo
+  </select>
+
+  <select id="exportCompanyStudent" parameterType="java.lang.String" resultType="com.management.model.Student">
+    select * from studentinfo  where CompanyID = #{companyID}
+  </select>
+</mapper>

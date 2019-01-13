@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.StudentFileMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.StudentFile" >
+    <id column="StudentFileID" property="studentfileid" jdbcType="VARCHAR" />
+    <result column="StudentFileName" property="studentfilename" jdbcType="VARCHAR" />
+    <result column="StudentFilePlace" property="studentfileplace" jdbcType="VARCHAR" />
+    <result column="StudentFileType" property="studentfiletype" jdbcType="INTEGER" />
+    <result column="UploadTime" property="uploadtime" jdbcType="DATE" />
+    <result column="StudentID" property="studentid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    StudentFileID, StudentFileName, StudentFilePlace, StudentFileType, UploadTime, StudentID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from studentfileinfo
+    where StudentFileID = #{studentfileid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from studentfileinfo
+    where StudentFileID = #{studentfileid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.StudentFile" >
+    insert into studentfileinfo (StudentFileID, StudentFileName, StudentFilePlace, 
+      StudentFileType, UploadTime, StudentID
+      )
+    values (#{studentfileid,jdbcType=VARCHAR}, #{studentfilename,jdbcType=VARCHAR}, #{studentfileplace,jdbcType=VARCHAR}, 
+      #{studentfiletype,jdbcType=INTEGER}, #{uploadtime,jdbcType=DATE}, #{studentid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.StudentFile" >
+    insert into studentfileinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentfileid != null" >
+        StudentFileID,
+      </if>
+      <if test="studentfilename != null" >
+        StudentFileName,
+      </if>
+      <if test="studentfileplace != null" >
+        StudentFilePlace,
+      </if>
+      <if test="studentfiletype != null" >
+        StudentFileType,
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime,
+      </if>
+      <if test="studentid != null" >
+        StudentID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentfileid != null" >
+        #{studentfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfilename != null" >
+        #{studentfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfileplace != null" >
+        #{studentfileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfiletype != null" >
+        #{studentfiletype,jdbcType=INTEGER},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=DATE},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.StudentFile" >
+    update studentfileinfo
+    <set >
+      <if test="studentfilename != null" >
+        StudentFileName = #{studentfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfileplace != null" >
+        StudentFilePlace = #{studentfileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfiletype != null" >
+        StudentFileType = #{studentfiletype,jdbcType=INTEGER},
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime = #{uploadtime,jdbcType=DATE},
+      </if>
+      <if test="studentid != null" >
+        StudentID = #{studentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where StudentFileID = #{studentfileid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.StudentFile" >
+    update studentfileinfo
+    set StudentFileName = #{studentfilename,jdbcType=VARCHAR},
+      StudentFilePlace = #{studentfileplace,jdbcType=VARCHAR},
+      StudentFileType = #{studentfiletype,jdbcType=INTEGER},
+      UploadTime = #{uploadtime,jdbcType=DATE},
+      StudentID = #{studentid,jdbcType=VARCHAR}
+    where StudentFileID = #{studentfileid,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="addStudentFile" parameterType="com.management.model.StudentFile" >
+    insert into studentfileinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentfileid != null" >
+        StudentFileID,
+      </if>
+      <if test="studentfilename != null" >
+        StudentFileName,
+      </if>
+      <if test="studentfileplace != null" >
+        StudentFilePlace,
+      </if>
+      <if test="studentfiletype != null" >
+        StudentFileType,
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime,
+      </if>
+      <if test="studentid != null" >
+        StudentID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentfileid != null" >
+        #{studentfileid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfilename != null" >
+        #{studentfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfileplace != null" >
+        #{studentfileplace,jdbcType=VARCHAR},
+      </if>
+      <if test="studentfiletype != null" >
+        #{studentfiletype,jdbcType=INTEGER},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=DATE},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getStudentFileInfo" parameterType="java.lang.String" resultType="Map">
+    select
+    studentfileinfo.StudentFileID,
+    studentfileinfo.StudentFileName,
+    studentfileinfo.StudentFilePlace,
+    studentfileinfo.StudentFileType,
+    studentinfo.StudentName,
+    studentfileinfo.StudentID
+    from studentfileinfo , studentinfo
+    where studentinfo.StudentID = studentfileinfo.StudentID and studentinfo.TeacherID =#{teacherID}
+  </select>
+
+  <select id="getFilePlace" parameterType="java.lang.String" resultType="java.lang.String">
+    select StudentFilePlace from studentfileinfo where StudentFileID = #{fileID}
+  </select>
+
+  <select id="getStudentFileList" parameterType="java.lang.String" resultType="Map">
+    select StudentFileID,StudentFileName,StudentFilePlace,StudentFileType from studentfileinfo where StudentID = #{studentID}
+  </select>
+
+</mapper>

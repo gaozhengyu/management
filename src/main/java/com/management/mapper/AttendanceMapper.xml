@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.AttendanceMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.Attendance" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="StudentID" property="studentid" jdbcType="VARCHAR" />
+    <result column="AttendanceDate" property="attendancedate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, StudentID, AttendanceDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attendanceinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attendanceinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.Attendance" >
+    insert into attendanceinfo (Id, StudentID, AttendanceDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentid,jdbcType=VARCHAR}, #{attendancedate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.Attendance" >
+    insert into attendanceinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="studentid != null" >
+        StudentID,
+      </if>
+      <if test="attendancedate != null" >
+        AttendanceDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="attendancedate != null" >
+        #{attendancedate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Attendance" >
+    update attendanceinfo
+    <set >
+      <if test="studentid != null" >
+        StudentID = #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="attendancedate != null" >
+        AttendanceDate = #{attendancedate,jdbcType=DATE},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.Attendance" >
+    update attendanceinfo
+    set StudentID = #{studentid,jdbcType=VARCHAR},
+      AttendanceDate = #{attendancedate,jdbcType=DATE}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

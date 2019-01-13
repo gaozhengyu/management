@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.TongjiMapper" >
+
+    <!-- 去向统计 -->
+    <select id="getDirectionRenshu" resultType="Map">
+        select count(*) total,
+        sum(case when Direction='校内实训' then '1' else '0' end ) xiaonei,
+        sum(case when direction='学校合作实训公司' then 1 else 0 end ) hezuo,
+        sum(case when direction='自行联系实训公司' then 1 else 0 end ) zixing
+        from studentinfo
+        where classID in
+        <foreach collection="list" item = "classID" index="index"
+                 open="(" close=")" separator=",">
+            #{classID}
+        </foreach>
+    </select>
+
+    <!-- 公司人数统计 -->
+    <select id="getCompanyRenshu" resultType="Map">
+
+        select
+        companyinfo.companyname,
+        companyinfo.companyid,
+        (
+        select count(1)
+        from studentinfo
+        where studentinfo.companyid = companyinfo.companyid
+        and studentinfo.classid
+        in
+        <foreach collection="list" item = "classID" index="index"
+                 open="(" close=")" separator=",">
+            #{classID}
+        </foreach>
+        ) as num from companyinfo ;
+    </select>
+
+    <!-- 教师学生统计 -->
+    <select id="getTeacherRenshu" resultType="Map">
+
+        select t.teachername,(select count(1) from studentinfo s where s.teacherid=t.teacherid  and s.classid in
+        <foreach collection="list" item = "classID" index="index"
+                 open="(" close=")" separator=",">
+        #{classID}
+        </foreach>
+        )
+        as num from teacherinfo t where role  = 1
+    </select>
+
+    <select id="getResultList" resultType="Map">
+        select studentid,studentName,classid,TrainningResult,subject
+        from studentinfo where
+        studentinfo.classid in
+        <foreach collection="list" item = "classID" index="index"
+                 open="(" close=")" separator=",">
+            #{classID}
+        </foreach>
+    </select>
+
+    <select id="getResultRenshu" resultType="Map">
+        select
+        count(case when trainningresult between 90 and 99 then 1 end) as '90分以上',
+        count(case when trainningresult between 80 and 89 then 1 end) as '80-89分',
+        count(case when trainningresult between 70 and 79 then 1 end) as '70-79分',
+        count(case when trainningresult between 60 and 69 then 1 end) as '60-69分',
+        count(case when trainningresult &lt; 60 then 1 end) as 60分以下
+        from studentinfo
+        where studentinfo.classid in
+        <foreach collection = "list" item = "classID" index = "index"
+                 open="(" close=")" separator=",">
+            #{classID}
+        </foreach>
+    </select>
+
+</mapper>

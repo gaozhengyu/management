@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.Company" >
+    <id column="CompanyID" property="companyid" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="CompanyType1" property="companytype1" jdbcType="INTEGER" />
+    <result column="CompanyType2" property="companytype2" jdbcType="INTEGER" />
+    <result column="CompanyPassword" property="companypassword" jdbcType="VARCHAR" />
+    <result column="CompanyCity" property="companycity" jdbcType="VARCHAR" />
+    <result column="Contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="CompanyPhone" property="companyphone" jdbcType="VARCHAR" />
+    <result column="authorize" property="authorize" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CompanyID, CompanyName, CompanyType1, CompanyType2, CompanyPassword, CompanyCity, 
+    Contacts, CompanyPhone, authorize
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from companyinfo
+    where CompanyID = #{companyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from companyinfo
+    where CompanyID = #{companyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.Company" >
+    insert into companyinfo (CompanyID, CompanyName, CompanyType1, 
+      CompanyType2, CompanyPassword, CompanyCity, 
+      Contacts, CompanyPhone, authorize
+      )
+    values (#{companyid,jdbcType=VARCHAR}, #{companyname,jdbcType=VARCHAR}, #{companytype1,jdbcType=INTEGER}, 
+      #{companytype2,jdbcType=INTEGER}, #{companypassword,jdbcType=VARCHAR}, #{companycity,jdbcType=VARCHAR}, 
+      #{contacts,jdbcType=VARCHAR}, #{companyphone,jdbcType=VARCHAR}, #{authorize,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.Company" >
+    insert into companyinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyid != null" >
+        CompanyID,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="companytype1 != null" >
+        CompanyType1,
+      </if>
+      <if test="companytype2 != null" >
+        CompanyType2,
+      </if>
+      <if test="companypassword != null" >
+        CompanyPassword,
+      </if>
+      <if test="companycity != null" >
+        CompanyCity,
+      </if>
+      <if test="contacts != null" >
+        Contacts,
+      </if>
+      <if test="companyphone != null" >
+        CompanyPhone,
+      </if>
+      <if test="authorize != null" >
+        authorize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyid != null" >
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype1 != null" >
+        #{companytype1,jdbcType=INTEGER},
+      </if>
+      <if test="companytype2 != null" >
+        #{companytype2,jdbcType=INTEGER},
+      </if>
+      <if test="companypassword != null" >
+        #{companypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companycity != null" >
+        #{companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyphone != null" >
+        #{companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="authorize != null" >
+        #{authorize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Company" >
+    update companyinfo
+    <set >
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype1 != null" >
+        CompanyType1 = #{companytype1,jdbcType=INTEGER},
+      </if>
+      <if test="companytype2 != null" >
+        CompanyType2 = #{companytype2,jdbcType=INTEGER},
+      </if>
+      <if test="companypassword != null" >
+        CompanyPassword = #{companypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companycity != null" >
+        CompanyCity = #{companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        Contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyphone != null" >
+        CompanyPhone = #{companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="authorize != null" >
+        authorize = #{authorize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CompanyID = #{companyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.Company" >
+    update companyinfo
+    set CompanyName = #{companyname,jdbcType=VARCHAR},
+      CompanyType1 = #{companytype1,jdbcType=INTEGER},
+      CompanyType2 = #{companytype2,jdbcType=INTEGER},
+      CompanyPassword = #{companypassword,jdbcType=VARCHAR},
+      CompanyCity = #{companycity,jdbcType=VARCHAR},
+      Contacts = #{contacts,jdbcType=VARCHAR},
+      CompanyPhone = #{companyphone,jdbcType=VARCHAR},
+      authorize = #{authorize,jdbcType=INTEGER}
+    where CompanyID = #{companyid,jdbcType=VARCHAR}
+  </update>
+  
+    <!-- 获取公司信息 -->
+  <select id="findCompanyInfo" parameterType="java.lang.String" resultType="com.management.model.Company">
+    select * from companyinfo where CompanyID = #{companyID}
+  </select>
+  
+   <!-- 重置密码 -->
+  <update id="resetPassword" parameterType="java.lang.String">
+    update companyinfo
+    set CompanyPassword = '123456'
+    where CompanyID = #{companyID}
+  </update>
+  
+   <!-- 获取全部公司信息 -->
+  <select id="findAllCompany" resultType="map">
+    select
+    companyinfo.CompanyID,
+    companyinfo.CompanyName,
+    companyinfo.CompanyType1,
+    companyinfo.CompanyType2,
+    companyinfo.CompanyPassword,
+    companyinfo.CompanyCity,
+    companyinfo.Contacts,
+    companyinfo.CompanyPhone,
+    companyinfo.Authorize,
+    companyfileinfo.CompanyFileID,
+    companyfileinfo.CompanyFileName,
+    companyfileinfo.CompanyFilePlace,
+    companyfileinfo.CompanyFileType
+    from companyinfo
+    left join companyfileinfo
+    on companyinfo.companyid = companyfileinfo.companyid
+    and companyfileinfo.companyfiletype = 1
+    order by Companyfileinfo.UploadTime desc
+  </select>
+
+  <!-- 获取全部公司信息 -->
+  <select id="findAuthorizeCompany" resultType="Map">
+    select * from
+    (
+      select
+        companyinfo.CompanyID,
+        companyinfo.CompanyName,
+        companyinfo.CompanyType1,
+        companyinfo.CompanyType2,
+        companyinfo.CompanyPassword,
+        companyinfo.CompanyCity,
+        companyinfo.Contacts,
+        companyinfo.CompanyPhone,
+        companyinfo.Authorize,
+        companyfileinfo.CompanyFileID,
+        companyfileinfo.CompanyFileName,
+        companyfileinfo.CompanyFilePlace,
+        companyfileinfo.CompanyFileType
+        from companyinfo
+        left join companyfileinfo
+        on companyfileinfo.companyfiletype = 1
+		and companyinfo.companyid = companyfileinfo.companyid
+		order by Companyfileinfo.UploadTime desc
+	  ) t
+	  where authorize = 1;
+  </select>
+
+    <!-- 查找指定类型的公司-->
+  <select id="findCompany" parameterType="com.management.model.Company" resultType="com.management.model.Company">
+    select * from companyinfo where
+    authorize = 1
+    <if test="companytype1 != null" >
+      and CompanyType1 = #{companytype1,jdbcType=INTEGER}
+    </if>
+    <if test="companytype2 != null" >
+      and CompanyType2 = #{companytype2,jdbcType=INTEGER}
+    </if>
+  </select>
+
+    <!-- 更新公司信息 -->
+  <update id="updateCompanyInfo" parameterType="com.management.model.Company">
+    update companyinfo
+    <set >
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype1 != null" >
+        CompanyType1 = #{companytype1,jdbcType=INTEGER},
+      </if>
+      <if test="companytype2 != null" >
+        CompanyType2 = #{companytype2,jdbcType=INTEGER},
+      </if>
+      <if test="companypassword != null" >
+        CompanyPassword = #{companypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="companycity != null" >
+        CompanyCity = #{companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        Contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyphone != null" >
+        CompanyPhone = #{companyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="authorize != null" >
+        authorize = #{authorize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CompanyID = #{companyid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="exportCompany" resultType="com.management.model.Company">
+    select * FROM companyinfo
+  </select>
+
+</mapper>

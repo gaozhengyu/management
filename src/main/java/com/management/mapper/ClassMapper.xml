@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.ClassMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.Class" >
+    <id column="ClassID" property="classid" jdbcType="VARCHAR" />
+    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    <result column="Grade" property="grade" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ClassID, ClassName, Grade
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from classinfo
+    where ClassID = #{classid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from classinfo
+    where ClassID = #{classid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.Class" >
+    insert into classinfo (ClassID, ClassName, Grade
+      )
+    values (#{classid,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.Class" >
+    insert into classinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="classname != null" >
+        ClassName,
+      </if>
+      <if test="grade != null" >
+        Grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Class" >
+    update classinfo
+    <set >
+      <if test="classname != null" >
+        ClassName = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        Grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ClassID = #{classid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.Class" >
+    update classinfo
+    set ClassName = #{classname,jdbcType=VARCHAR},
+      Grade = #{grade,jdbcType=VARCHAR}
+    where ClassID = #{classid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getClassName" parameterType="java.lang.String" resultType="java.lang.String">
+    select ClassName from classinfo where ClassID = #{classID}
+  </select>
+
+  <select id="getClassID" parameterType="java.lang.String" resultType="java.lang.String">
+    select ClassID from classinfo where ClassName = #{className}
+  </select>
+
+  <select id="getClassList" parameterType="java.lang.String" resultType="java.lang.String">
+    select classID FROM classinfo where grade = #{grade}
+  </select>
+
+  <select id="findAllClass" resultType="com.management.model.Class">
+    select * from classinfo
+  </select>
+
+  <select id="getGradeList" resultType="java.lang.String">
+    select DISTINCT grade from classinfo
+  </select>
+</mapper>

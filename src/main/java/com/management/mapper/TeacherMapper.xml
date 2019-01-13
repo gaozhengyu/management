@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.management.model.Teacher" >
+    <id column="TeacherID" property="teacherid" jdbcType="VARCHAR" />
+    <result column="TeacherName" property="teachername" jdbcType="VARCHAR" />
+    <result column="TeacherSex" property="teachersex" jdbcType="VARCHAR" />
+    <result column="TeacherPhone" property="teacherphone" jdbcType="VARCHAR" />
+    <result column="TeacherEmail" property="teacheremail" jdbcType="VARCHAR" />
+    <result column="Role" property="role" jdbcType="INTEGER" />
+    <result column="TeacherPassword" property="teacherpassword" jdbcType="VARCHAR" />
+    <result column="endTime" property="endtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TeacherID, TeacherName, TeacherSex, TeacherPhone, TeacherEmail, Role, TeacherPassword, 
+    endTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacherinfo
+    where TeacherID = #{teacherid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from teacherinfo
+    where TeacherID = #{teacherid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.management.model.Teacher" >
+    insert into teacherinfo (TeacherID, TeacherName, TeacherSex, 
+      TeacherPhone, TeacherEmail, Role, 
+      TeacherPassword, endTime)
+    values (#{teacherid,jdbcType=VARCHAR}, #{teachername,jdbcType=VARCHAR}, #{teachersex,jdbcType=VARCHAR}, 
+      #{teacherphone,jdbcType=VARCHAR}, #{teacheremail,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
+      #{teacherpassword,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.model.Teacher" >
+    insert into teacherinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherid != null" >
+        TeacherID,
+      </if>
+      <if test="teachername != null" >
+        TeacherName,
+      </if>
+      <if test="teachersex != null" >
+        TeacherSex,
+      </if>
+      <if test="teacherphone != null" >
+        TeacherPhone,
+      </if>
+      <if test="teacheremail != null" >
+        TeacherEmail,
+      </if>
+      <if test="role != null" >
+        Role,
+      </if>
+      <if test="teacherpassword != null" >
+        TeacherPassword,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="teachername != null" >
+        #{teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="teachersex != null" >
+        #{teachersex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherphone != null" >
+        #{teacherphone,jdbcType=VARCHAR},
+      </if>
+      <if test="teacheremail != null" >
+        #{teacheremail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="teacherpassword != null" >
+        #{teacherpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.model.Teacher" >
+    update teacherinfo
+    <set>
+      TeacherID = #{teacherid,jdbcType=VARCHAR},
+      <if test="teachername != null" >
+        TeacherName = #{teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="teachersex != null" >
+        TeacherSex = #{teachersex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherphone != null" >
+        TeacherPhone = #{teacherphone,jdbcType=VARCHAR},
+      </if>
+      <if test="teacheremail != null" >
+        TeacherEmail = #{teacheremail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        Role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="teacherpassword != null" >
+        TeacherPassword = #{teacherpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TeacherID = #{teacherid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.model.Teacher" >
+    update teacherinfo
+    set TeacherName = #{teachername,jdbcType=VARCHAR},
+      TeacherSex = #{teachersex,jdbcType=VARCHAR},
+      TeacherPhone = #{teacherphone,jdbcType=VARCHAR},
+      TeacherEmail = #{teacheremail,jdbcType=VARCHAR},
+      Role = #{role,jdbcType=INTEGER},
+      TeacherPassword = #{teacherpassword,jdbcType=VARCHAR},
+      endTime = #{endtime,jdbcType=VARCHAR}
+    where TeacherID = #{teacherid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findAllTeacher" resultType="com.management.model.Teacher">
+    select * from teacherinfo
+  </select>
+
+  <select id="getAllTeacher" resultType="com.management.model.Teacher">
+    select * from teacherinfo where role = 1
+  </select>
+
+  <select id="findTeacherInfo" parameterType="java.lang.String" resultType="com.management.model.Teacher">
+    select * from teacherinfo where TeacherID = #{teacherID}
+  </select>
+
+  <!-- 重置密码 -->
+  <update id="resetPassword" parameterType="java.lang.String">
+    update teacherinfo
+    set TeacherPassword = '123456'
+    where TeacherID = #{teacherID}
+  </update>
+
+  <!-- 获取学生更新去向时间 -->
+  <select id="getDirectionTime" resultType="java.lang.String">
+    select endTime from teacherinfo where role = 0;
+  </select>
+</mapper>
