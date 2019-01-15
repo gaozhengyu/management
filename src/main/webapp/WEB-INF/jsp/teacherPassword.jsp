@@ -13,16 +13,19 @@
     <title>软件学院毕业实训管理系统</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 
     <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/metisMenu/metisMenu.min.css">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../dist/css/sb-admin-2.css">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../vendor/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/bootstrapValidator.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,14 +33,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
-<input type="hidden" id="hidden1" value="${teacher.teacherid}">
 
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -56,35 +56,32 @@
                     注销
                 </a>
             </li>
-
         </ul>
-        <!-- /.navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="${pageContext.request.contextPath}/teacher/findTeacherInfo?teacherID=${teacher.teacherid}"> 个人信息</a>
+                        <a href="${pageContext.request.contextPath}/teacher/findTeacherInfo?teacherID=${teacher.teacherid}">
+                            个人信息</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/teacher/findAllStudent?teacherID=${teacher.teacherid}"> 学生信息查看</a>
-                    </li>
-                    <%--<li>--%>
-                        <%--<a href="${pageContext.request.contextPath}/teacher/findStudentReport?teacherID=${teacher.teacherid}"> 周月报查看</a>--%>
-                    <%--</li>--%>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/teacher/getStudentResult?teacherID=${teacher.teacherid}"> 成绩录入</a>
+                        <a href="${pageContext.request.contextPath}/teacher/findAllStudent?teacherID=${teacher.teacherid}">
+                            学生信息查看</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/teacher/getStudentFileInfo?teacherID=${teacher.teacherid}"> 文件下载</a>
+                        <a href="${pageContext.request.contextPath}/teacher/getStudentResult?teacherID=${teacher.teacherid}">
+                            成绩录入</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/teacher/getStudentFileInfo?teacherID=${teacher.teacherid}">
+                            文件下载</a>
                     </li>
                     <li>
                         <a href=""> 密码修改</a>
                     </li>
                 </ul>
             </div>
-            <!-- /.sidebar-collapse -->
         </div>
-        <!-- /.navbar-static-side -->
     </nav>
 
     <div id="page-wrapper">
@@ -92,9 +89,8 @@
             <div class="col-lg-12">
                 <h1 class="page-header">密码修改</h1>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -103,96 +99,79 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>请输入旧密码</label>
-                                    <input id="oldPassword" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>请输入新密码</label>
-                                    <input id="newPassword" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>请再次输入新密码</label>
-                                    <input id="newPassword2" class="form-control">
-                                </div>
-                                <button id="save" type="submit" class="btn btn-default">保存</button>
+                            <div class="col-lg-7">
+                                <form id="passwordInfo">
+                                    <input type="hidden" id="teacherID" name="teacherID" value="${teacher.teacherid}"/>
+                                    <input type="hidden" id="hiddenPassword" name="hiddenPassword"
+                                           value="${teacher.teacherpassword}"/>
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>旧密码:</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="oldPassword" name="oldPassword" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>新密码:</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="password" name="password" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>再次输入:</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="rePassword" name="rePassword" class="form-control">
+                                            </div>
+                                        </div>
+                                        <button id="save" style="margin-left: 10%" type="button"
+                                                onclick="updatePassword()" class="btn btn-success">保存
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- /.col-lg-6 (nested) -->
                         </div>
-                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /#page-wrapper -->
 </div>
-<!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script type="text/javascript" src="../vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
+<script type="text/javascript" src="../dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+
+<script type="text/javascript" src="../js/dataVerify.js"></script>
 
 </body>
 <script>
-    $(function () {
-        $("#oldPassword").blur(function () {
-
-            var oldPassword = $("#oldPassword").val();
-            if(oldPassword == null || oldPassword == ""){
-                alert("请输入密码");
-            }else{
-                if(oldPassword != "${teacher.teacherpassword}"){
-                    alert("密码输入错误");
-                    $("#oldPassword").val("");
+    function updatePassword() {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: '${pageContext.request.contextPath}/teacher/updateTeacherInfo',
+//            contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            data: $("#passwordInfo").serialize(),
+            dataType: "json",
+            success: function (data) {
+                var data = data["success"];
+                if (data == true) {
+                    alert("修改成功");
+                    location.reload();
                 }
             }
         });
-
-        $("#save").click(function () {
-            var teacherID = $("#hidden1").val();
-            var oldPassword = $("#oldPassword").val();
-            var newPassword = $("#newPassword").val();
-            var newPassword2 = $("#newPassword2").val();
-            if(oldPassword == null || oldPassword == ""){
-                alert("未输入旧密码");
-                location.reload();
-            }else {
-                if(newPassword == null || newPassword == ""){
-                    alert("未输入新密码")
-                }else{
-                    if(newPassword == newPassword2){
-                        $.post("${pageContext.request.contextPath}/teacher/updateTeacherInfo",
-                            {"teacherID":teacherID,"password":newPassword},
-                            function (data) {
-                                if(data.success == true){
-                                    alert("修改成功");
-                                    location.reload();
-                                }
-                            }
-                        )
-                    }
-                    else {
-                        alert("新密码输入不一致");
-                    }
-                }
-            }
-        });
-    });
-
+    }
 </script>
 
 </html>

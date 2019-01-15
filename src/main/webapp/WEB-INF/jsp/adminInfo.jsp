@@ -13,17 +13,19 @@
     <title>软件学院毕业实训管理系统</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 
     <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/metisMenu/metisMenu.min.css">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../dist/css/sb-admin-2.css">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../vendor/font-awesome/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/bootstrapValidator.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -68,10 +70,12 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 指导教师信息管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllTeacherInfo?type=1&teacherID=${teacher.teacherid}"> 指导教师信息维护</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllTeacherInfo?type=1&teacherID=${teacher.teacherid}">
+                                    指导教师信息维护</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllTeacherInfo?type=2&teacherID=${teacher.teacherid}"> 指导教师信息添加</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllTeacherInfo?type=2&teacherID=${teacher.teacherid}">
+                                    指导教师信息添加</a>
                             </li>
                         </ul>
                     </li>
@@ -79,10 +83,12 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 学生信息管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=1&teacherID=${teacher.teacherid}"> 学生信息维护</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=1&teacherID=${teacher.teacherid}">
+                                    学生信息维护</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=2&teacherID=${teacher.teacherid}"> 学生信息添加</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=2&teacherID=${teacher.teacherid}">
+                                    学生信息添加</a>
                             </li>
                         </ul>
                     </li>
@@ -90,10 +96,12 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 公司信息管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=1&teacherID=${teacher.teacherid}"> 公司信息维护</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=1&teacherID=${teacher.teacherid}">
+                                    公司信息维护</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=2&teacherID=${teacher.teacherid}"> 公司信息添加</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=2&teacherID=${teacher.teacherid}">
+                                    公司信息添加</a>
                             </li>
                         </ul>
                     </li>
@@ -105,7 +113,8 @@
                         <a href="#"> 实训过程管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=3&teacherID=${teacher.teacherid}"> 公司授权</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=3&teacherID=${teacher.teacherid}">
+                                    公司授权</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=3&teacherID=${teacher.teacherid}">
@@ -144,57 +153,51 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label h5">工号</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" id="teacherID" class="form-control"
-                                                   value="${teacher.teacherid}" readonly="readonly">
+                            <div class="col-lg-7">
+                                <form id="teacherInfo">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>工号</strong></label>
+                                            <div class="col-sm-6">
+                                                <input type="text" id="teacherID" name="teacherID" class="form-control"
+                                                       value="${teacher.teacherid}" readonly="readonly">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label h5">姓名</label>
-                                        <div class="col-sm-6">
-                                            <input id="teacherName" class="form-control" value="${teacher.teachername}"
-                                                   onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-                                                   onpaste="value=value.replace(/[^\u4E00-\u9FA5]/g,'')"
-                                                   oncontextmenu = "value=value.replace(/[^\u4E00-\u9FA5]/g,'')">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>姓名</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="teacherName" class="form-control" name="teacherName"
+                                                       value="${teacher.teachername}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label h5">性别</label>
-                                        <div class="col-sm-6">
-                                            <select id="teacherSex" class="form-control" value="${teacher.teachersex}">
-                                                <option value="男">男</option>
-                                                <option value="女">女</option>
-                                            </select>
-                                            <%--<input id="teacherSex" class="form-control" value="${teacher.teachersex}">--%>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>性别</strong></label>
+                                            <div class="col-sm-6">
+                                                <select id="teacherSex" class="form-control" name="teacherSex">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label h5">邮箱</label>
-                                        <div class="col-sm-6">
-                                            <input id="teacherEmail" class="form-control"
-                                                   value="${teacher.teacheremail}"
-                                                   onblur="judgeEmail()">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>邮箱</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="teacherEmail" name="teacherEmail" class="form-control"
+                                                       value="${teacher.teacheremail}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label h5">联系方式</label>
-                                        <div class="col-sm-6">
-                                            <input id="teacherPhone" class="form-control"
-                                                   value="${teacher.teacherphone}"
-                                                   onkeyup="value=value.replace(/[^0-9]/g,'')"
-                                                   onpaste="value=value.replace(/[^0-9]/g,'')"
-                                                   oncontextmenu="value=value.replace(/[^0-9]/g,'')"
-                                                   onblur="judgePhone()"
-                                                   maxlength="11" >
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label h5"><strong>联系方式</strong></label>
+                                            <div class="col-sm-6">
+                                                <input id="teacherPhone" name="teacherPhone" class="form-control"
+                                                       value="${teacher.teacherphone}">
+                                            </div>
                                         </div>
+                                        <button id="save" style="margin-left: 10%" type="button" onclick="updateInfo()"
+                                                class="btn btn-success">保存
+                                        </button>
                                     </div>
-                                    <button id="save" style="margin-left: 10%" type="submit" class="btn btn-success">保存</button>
-
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -205,64 +208,47 @@
 </div>
 
 <!-- jQuery -->
-<script src="../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script type="text/javascript" src="../vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
+<script type="text/javascript" src="../dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+
+<script type="text/javascript" src="../js/dataVerify.js"></script>
 
 </body>
 <script>
     $(function () {
-        $("#save").click(function () {
-            var teacherID = $("#teacherID").val();
-            var teacherName = $("#teacherName").val();
-            var teacherSex = $("#teacherSex").val();
-            var teacherEmail = $("#teacherEmail").val();
-            var teacherPhone = $("#teacherPhone").val();
-            $.post("${pageContext.request.contextPath}/teacher/updateTeacherInfo",
-                {
-                    "teacherID": teacherID,
-                    "teacherName": teacherName,
-                    "teacherSex": teacherSex,
-                    "teacherEmail": teacherEmail,
-                    "teacherPhone": teacherPhone
-                },
-                function (data) {
-                    if (data.success == true) {
-                        alert("保存成功");
-                        location.reload();
-                    }
-                }
-            );
-        });
+        $("#teacherSex option[value=${teacher.teachersex}]").attr("selected", "selected");
     });
 
-    function judgeEmail(){
-        //验证邮箱
-        if(!$("#teacherEmail").val().match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)) {
-            alert("邮箱格式不正确！请重新输入");
-            $("#teacherEmail").val("");
-        }
-    }
-
-    function judgePhone() {
-        var phone = $("#teacherPhone").val();
-        var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
-        if (phone.substring(0, 1) == 1) {
-            if (!isMobile.exec(phone) && phone.length != 11) {
-                //错误提示信息
-                alert("手机号码有误");
-                $("#teacherPhone").val("");
+    function updateInfo() {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: '${pageContext.request.contextPath}/teacher/updateTeacherInfo',
+//            contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            data: $("#teacherInfo").serialize(),
+            dataType: "json",
+            success: function (data) {
+                var data = data["success"];
+                if (data == true) {
+                    alert("修改成功");
+                    location.reload();
+                }
+            },
+            error: function () {
+                alert("异常！");
             }
-        }
+        });
     }
-
 </script>
 
 </html>
