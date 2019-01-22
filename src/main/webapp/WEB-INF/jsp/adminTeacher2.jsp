@@ -13,19 +13,21 @@
     <title>软件学院实训管理系统</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 
     <!-- MetisMenu CSS -->
-    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../vendor/metisMenu/metisMenu.min.css">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../dist/css/sb-admin-2.css">
 
     <!-- Custom Fonts -->
-    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../vendor/font-awesome/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/bootstrapValidator.css">
 
-    <link href="../vendor/css/datatablestyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css/datatablestyle.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,7 +41,6 @@
 <body>
 
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -58,9 +59,8 @@
                     注销
                 </a>
             </li>
-
         </ul>
-        <!-- /.navbar-header -->
+
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -114,7 +114,8 @@
                         <a href="#"> 实训过程管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=3&teacherID=${teacher.teacherid}"> 公司授权</a>
+                                <a href="${pageContext.request.contextPath}/admin/findAllCompanyInfo?type=3&teacherID=${teacher.teacherid}">
+                                    公司授权</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/admin/findAllStudentInfo?type=3&teacherID=${teacher.teacherid}">
@@ -143,9 +144,8 @@
             <div class="col-lg-12">
                 <h1 class="page-header">指导教师信息管理</h1>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
+
         <div class="row row1">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -153,8 +153,8 @@
                         教师信息列表
                     </div>
                     <div class="panel-body">
-                        <button class="btn btn-success" style="margin-bottom: 1%" onclick="importPanel()">导入</button>
-                        <button class="btn btn-success" style="margin-bottom: 1%" onclick="addTeacher()">添加指导教师</button>
+                        <button class="btn btn-success" style="margin-bottom: 1%" data-toggle="modal" data-target="#importPanel">导入</button>
+                        <button class="btn btn-success" style="margin-bottom: 1%" data-toggle="modal" data-target="#addPanel">添加指导教师</button>
                         <table width="100%" class="table table-striped table-bordered table-hover"
                                id="dataTables-example">
                             <thead>
@@ -176,7 +176,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="importPanel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="importPanel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -201,7 +201,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="addPanel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addPanel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -214,40 +214,45 @@
                     信息填写错误。
                 </div>
                 <div class="row">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label h5">工号</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="teacherID" class="form-control">
+                    <form id="teacherInfo">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label h5">工号</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="teacherID" name="teacherID" class="form-control">
+                                </div>
+                                <div style="color: red"><strong>*</strong></div>
                             </div>
-                            <div style="color: red"><strong>*</strong></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label h5">姓名</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="teacherName" class="form-control">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label h5">姓名</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="teacherName" name="teacherName" class="form-control">
+                                </div>
+                                <div style="color: red"><strong>*</strong></div>
                             </div>
-                            <div style="color: red"><strong>*</strong></div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label h5">性别</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="teacherSex" class="form-control">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label h5">性别</label>
+                                <div class="col-sm-6">
+                                    <select id="teacherSex" name="teacherSex" class="form-control">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label h5">联系方式</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="teacherPhone" name="teacherPhone" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label h5">邮箱</label>
+                                <div class="col-sm-6">
+                                    <input type="text" id="teacherEmail" name="teacherEmail" class="form-control">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label h5">联系方式</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="teacherPhone" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label h5">邮箱</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="teacherEmail" class="form-control">
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
@@ -258,86 +263,64 @@
     </div>
 </div>
 
-<!-- jQuery -->
-<script src="../vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<script type="text/javascript" src="../vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- DataTables JavaScript -->
-<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+<script type="text/javascript" src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
+<script type="text/javascript" src="../dist/js/sb-admin-2.js"></script>
 
+<script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="../js/dataVerify.js"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
 
-    $.ajaxSetup({
-        async : false
-    });
-
-    function addTeacher() {
-        $("#addPanel").modal("show");
-    }
-
-    function importPanel() {
-        $("#importPanel").modal("show");
-    }
-
-    //数据检验
-    function judge(data) {
-        //数据为空
-        if(data == "" || data == null){
-            return false;
-        }
-        return true;
-    }
-
     function saveTeacher() {
         var teacherID = $("#teacherID").val();
-        var teacherName = $("#teacherName").val();
-        var teacherSex = $("#teacherSex").val();
-        var teacherPhone = $("#teacherPhone").val();
-        var teacherEmail = $("#teacherEmail").val();
-        if(judge(teacherID) && judge(teacherName)){
-            $(".alert").hide();
-            $.post("${pageContext.request.contextPath}/admin/checkInfo",
-                {
-                    "type":"teacher",
-                    "checkID":teacherID
-                },
-                function (data) {
-                    if(data.success == false){
-                        $(".alert").text("该工号已存在");
-                        $(".alert").show();
-                    }else {
-                        $(".alert").hide();
-                        $.post("${pageContext.request.contextPath}/admin/saveTeacher",
-                            {
-                                "teacherID":teacherID,
-                                "teacherName":teacherName,
-                                "teacherSex":teacherSex,
-                                "teacherPhone":teacherPhone,
-                                "teacherEmail":teacherEmail
-                            },
-                            function (data) {
-                                if(data.success == true){
-                                    alert("添加成功");
-                                    window.location.reload();
-                                }
-                            });
-                    }
-                });
-        }else {
-            $(".alert").text("信息填写有误");
-            $(".alert").show();
-        }
+        $.ajax({
+            async: false,
+            type: "post",
+            url: '${pageContext.request.contextPath}/admin/checkInfo',
+            data: {
+                "type": "teacher",
+                "checkID": teacherID
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.success == false) {
+                    $(".alert").text("该工号已存在");
+                    $(".alert").show();
+                } else {
+                    $(".alert").hide();
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "${pageContext.request.contextPath}/admin/saveTeacher",
+                        data: $("#teacherInfo").serialize(),
+                        dataType: "json",
+                        success: function (data) {
+                            if(data.success == true){
+                                alert("添加成功");
+                                location.reload();
+                            }
+                        },
+                        error:function(){
+                            alert("添加失败");
+                        }
+                    });
+                }
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
     }
 
     function upload() {

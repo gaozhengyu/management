@@ -223,7 +223,6 @@
 
 <script type="text/javascript" src="../js/dataVerify.js"></script>
 
-</body>
 <script>
     $(function () {
         $("#teacherSex option[value=${teacher.teachersex}]").attr("selected", "selected");
@@ -250,5 +249,5 @@
         });
     }
 </script>
-
+</body>
 </html>
